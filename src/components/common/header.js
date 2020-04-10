@@ -4,8 +4,7 @@ import {
   View,
   Text
 } from 'react-native';
-
-export default class Header extends Component{
+ class Header extends Component{
     render(){
         const {header,headerText}=styles;
       return(
@@ -30,3 +29,5 @@ export default class Header extends Component{
      textAlign:'center'
     }
   });
+
+  export { Header };
