@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
-import {Text,View,StyleSheet,FlatList} from 'react-native';
+import {Text,View,FlatList} from 'react-native';
 import { connect } from 'react-redux';
-import {Card} from './common';
+import BookItem from './bookItem'
 
 class BookList extends Component {
     renderItem({item}){
             return(
-                <Card>
-                    <Text style={styles.titleStyle}>{item.title}</Text>
-                    <Text style={styles.authorStyle}>{item.author}</Text>
-                </Card>
+               <BookItem book={item}   />
             )
     }
 
@@ -33,15 +30,5 @@ return{
 }
 }
 
-const styles=StyleSheet.create({
-titleStyle:{
-fontSize:16,
-color:'black'
-},
-authorStyle:{
-fontSize:12,
-color:'gray'
-}
-});
 
 export default connect(mapStateToProps)(BookList);
