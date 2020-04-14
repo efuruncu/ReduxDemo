@@ -6,17 +6,22 @@ import *  as actions from '../actions';
 
 class BookItem extends Component{
     onPressed(){
-        const {book} =this.props;
-        this.props.selectBook(book);
+        const {book,selected} =this.props;
+        selected ?this.props.deselectBook() : this.props.selectBook(book);
     }
     render(){
-        const {book} =this.props;
+        const {book,selected} =this.props;
+
+        const descriptionField =selected ? (
+            <Text>{book.description}</Text>
+        ): null;
         return(
             <TouchableOpacity onPress={this.onPressed.bind(this)}>
             <Card>
                  <Text style={styles.titleStyle}>{book.title}</Text>
                 <Text style={styles.authorStyle}>{book.author}</Text>
             </Card>
+            {descriptionField}
             </TouchableOpacity>
         )
     }
@@ -33,4 +38,11 @@ const styles=StyleSheet.create({
     }
     });
 
-    export default connect(null,actions) (BookItem);
+    const mapStateToProps = (state,props) =>{
+        const selected= state.selectedBook && state.selectedBook.isbn === props.book.isbn;
+
+        return {
+            selected
+        }
+    }
+    export default connect(mapStateToProps,actions) (BookItem);
